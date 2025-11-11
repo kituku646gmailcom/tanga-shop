@@ -1,0 +1,375 @@
+<!doctype html>
+<html lang="en">
+<head>
+   <script src="paul.js"></script>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>TANGA FURNITURES — Home</title>
+  <meta name="description" content="Tanga Furnitures - comfort and style for every space" />
+
+  <style>
+    :root{
+      --brown:#0b1202;
+      --cream:#cac38f;
+      --white:rgba(46, 166, 214, 0.936);
+      --accent:#d42646;
+      --muted: #ffffff;
+      --shadow: 0 6px 20px rgba(43,34,26,0.12);
+      --radius:12px;
+      font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0;background:linear-gradient(180deg,var(--cream),hwb(0 100% 0% / 0.192));color:#222}
+
+    /* NAV */
+    .nav{position:sticky;top:0;z-index:50;background:hwb(61 3% 67% / 0.911);backdrop-filtter:blur(4px);box-shadow:0 2px 8px rgba(0,0,0,0.06)}
+    .nav-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:12px 20px}
+    .brand{display:flex;align-items:center;gap:12px;cursor:pointer}
+    .brand .logo{width:40px;height:40px;border-radius:8px;background:linear-gradient(135deg,var(--brown),var(--accent));display:flex;align-items:center;justify-content:center;color:var(--cream);font-weight:700}
+    nav ul{display:flex;gap:14px;list-style:none;margin:0;padding:0}
+    nav a{color:#222;text-decoration:none;padding:8px 10px;border-radius:8px}
+    nav a:hover{background:hsla(244, 40%, 39%, 0.936)}
+    .actions{display:flex;gap:8px;align-items:center}
+    .btn{background:var(--brown);color:var(--cream);padding:8px 12px;border-radius:10px;border:none;cursor:pointer;box-shadow:var(--shadow)}
+    .btn.ghost{background:transparent;color:var(--brown);border:1px solid rgba(139,94,60,0.12)}
+
+    /* HERO */
+    .hero{max-width:1100px;margin:28px auto;padding:24px;display:grid;grid-template-columns:1fr 420px;gap:24px;align-items:center}
+    .hero-card{background:linear-gradient(180deg,var(--red),var(--cream));padding:28px;border-radius:16px;box-shadow:var(--shadow)}
+    .hero h1{margin:0 0 12px;font-size:28px;color:var(--accent)}
+    .hero p{margin:0 0 18px;color:var(--muted)}
+    .hero .cta{display:flex;gap:12px}
+    .hero-image{border-radius:16px;overflow:hidden;box-shadow:var(--shadow)}
+    .hero-image img{display:block;width:100%;height:100%;object-fit:cover}
+
+    /* SECTIONS */
+    .container{max-width:1100px;margin:20px auto;padding:0 18px}
+    .card{background:var(--white);padding:18px;border-radius:12px;box-shadow:var(--shadow);margin-bottom:18px}
+
+    /* SHOP GRID */
+    .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+    .product{border-radius:12px;overflow:hidden;background:linear-gradient(180deg,hsla(73, 80%, 40%, 0.929),#fbf7f3);display:flex;flex-direction:column}
+    .product img{width:100%;height:180px;object-fit:cover}
+    .product-body{padding:10px;flex:1;display:flex;flex-direction:column}
+    .product h4{margin:0 0 6px;font-size:16px}
+    .price{font-weight:700;color:var(--accent);margin-top:auto}
+    .product button{margin-top:8px;padding:8px;border-radius:10px;border:none;background:var(--brown);color:var(--cream);cursor:pointer}
+
+    /* RESPONSIVE */
+    @media (max-width:1000px){.grid{grid-template-columns:repeat(3,1fr)}.hero{grid-template-columns:1fr 320px}}
+    @media (max-width:760px){.grid{grid-template-columns:repeat(2,1fr)}.hero{grid-template-columns:1fr}.nav-inner{padding:8px 12px}}
+    @media (max-width:420px){.grid{grid-template-columns:1fr}.brand .logo{width:36px;height:36px}}
+
+    /* FORMS */
+    .form-row{display:flex;gap:12px}
+    .input,textarea{width:100%;padding:10px;border-radius:10px;border:1px solid #421dc6}
+    textarea{min-height:100px;resize:vertical}
+
+    /* CART */
+    .cart-list{display:flex;flex-direction:column;gap:12px}
+    .cart-item{display:flex;gap:12px;align-items:center}
+    .cart-item img{width:80px;height:60px;object-fit:cover;border-radius:8px}
+
+    /* REVIEWS */
+    .review{border-top:1px dashed #3e09a7;padding:8px 0}
+
+    footer{margin-top:30px;padding:30px 18px;background:linear-gradient(180deg,hsl(264, 97%, 45%),var(--cream));}
+    .footer-inner{max-width:1100px;margin:0 auto;display:flex;justify-content:space-between;align-items:center}
+
+    /* small helpers */
+    .muted{color:var(--muted)}
+    .center{display:flex;align-items:center;justify-content:center}
+    .badge{background:#111ea7;padding:6px 8px;border-radius:999px;font-size:13px}
+
+    /* modal */
+    .modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,0.4);z-index:200}
+    .modal.show{display:flex}
+    .modal .panel{background:#5229c3;padding:18px;border-radius:12px;max-width:560px;width:96%;box-shadow:var(--shadow)}
+  </style>
+</head>
+<body>
+<marquee behavior="" direction="">Welcome to TANGA FURNITURES</marquee>
+  <header class="nav">
+    <div class="nav-inner">
+      <div class="brand" onclick="goTo('home')">
+        <div class="logo">T</div>
+        <div>
+          <div style="font-weight:700"></div>
+          <div style="font-size:12px;color:var(--muted)">Comfort & Style</div>
+        </div>
+      </div>
+      <nav>
+        <ul>
+          <li><a href="#home" onclick="goTo('home')">Home</a></li>
+          <li><a href="#about" onclick="goTo('about')">About Us</a></li>
+          <li><a href="#shop" onclick="goTo('shop')">Shop</a></li>
+          <li><a href="#login" onclick="goTo('login')">Login</a></li>
+          <li><a href="#contact" onclick="goTo('contact')">Contact</a></li>
+          <li><a href="#cart" onclick="goTo('cart')">Cart (<span id="cart-count">0</span>)</a></li>
+        </ul>
+      </nav>
+
+      <div class="actions">
+        <button class="btn ghost" onclick="goTo('shop')">Shop Now</button>
+        <button class="btn" onclick="goTo('cart')">View Cart</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO / Home -->
+  <main>
+    <section id="home" class="hero container" aria-label="home">
+      <div class="hero-card">
+        <h1>Welcome to TANGA FURNITURES</h1>
+        <p>Comfort and Style for Every Space — quality home and office furniture built to last. Browse our curated selection of chairs, tables, cupboards and more.</p>
+        <div class="cta">
+          <button class="btn" onclick="goTo('shop')">Shop Now</button>
+          <a class="btn ghost" href="#contact" onclick="goTo('contact')">Contact Us</a>
+        </div>
+        <div style="margin-top:18px;font-size:13px;color:var(--red)">
+          Free delivery within Nairobi on orders above KSh 15,000. Secure payments via M-Pesa and bank transfer.
+        </div>
+      </div>
+
+      <div class="hero-image">
+        <img src="https://via.placeholder.com/800x520.png?text=Living+Room+Furniture+Banner" alt="Tanga Furnitures banner"/>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about" class="container">
+      <div class="card">
+        <h2>About Us</h2>
+        <p><strong>Company Background:</strong> TANGA FURNITURES is a family-owned furniture store with years of experience producing durable and stylish furniture for homes and offices. We combine traditional craftsmanship with modern design to deliver pieces that last.</p>
+        <p><strong>Mission:</strong> To furnish every home and office with comfort, elegance, and affordability.</p>
+        <p><strong>Vision:</strong> To be the most trusted furniture brand known for innovation and customer satisfaction.</p>
+      </div>
+    </section>
+
+    <!-- SHOP -->
+    <section id="shop" class="container">
+      <div class="card">
+        <h2>Shop Our Collection</h2>
+        <p class="muted">Browse our selected furniture. Click "Add to Cart" to collect items you like.</p>
+        <div id="products" class="grid"></div>
+      </div>
+    </section>
+
+    <!-- LOGIN -->
+    <section id="login" class="container">
+      <div class="card" style="max-width:520px;margin:auto">
+        <h2>Login</h2>
+        <p class="muted">Sign in to access orders and reviews.</p>
+        <div style="margin-top:10px;display:flex;flex-direction:column;gap:10px">
+          <input id="username" class="input" placeholder="Username or email" />
+          <input id="password" class="input" placeholder="Password" type="password" />
+          <div style="display:flex;gap:8px;align-items:center">
+            <button class="btn" onclick="signin()">Sign In</button>
+            <a class="muted" href="#" style="text-decoration:underline;margin-left:8px">Forgot password?</a>
+          </div>
+          <div id="login-msg" class="muted" style="font-size:13px"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="container">
+      <div class="card" style="display:grid;grid-template-columns:1fr 320px;gap:18px">
+        <div>
+          <h2>Contact Us</h2>
+          <p>Phone: <strong>+254 712 345 678</strong><br/>Email: <strong>info@tangafurnitures.com</strong></p>
+          <p class="muted">Visit our store: 45 Tanga Street, Nairobi</p>
+
+          <h3>Send us a message</h3>
+          <input id="cname" class="input" placeholder="Your name" />
+          <input id="cemail" class="input" placeholder="Your email" style="margin-top:8px" />
+          <textarea id="cmessage" placeholder="Message" style="margin-top:8px"></textarea>
+          <div style="margin-top:8px"><button class="btn" onclick="sendContact()">Send Message</button></div>
+          <div id="contact-msg" class="muted" style="margin-top:8px"></div>
+        </div>
+
+        <div>
+          <h3>Store Location</h3>
+          <div style="border-radius:12px;overflow:hidden;box-shadow:var(--shadow)"><img src="https://via.placeholder.com/320x220.png?text=Map+Placeholder" alt="map" style="width:100%;height:100%;object-fit:cover"/></div>
+          <div style="margin-top:12px">
+            <div class="badge">Open: Mon - Sat (9am - 6pm)</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CART / REVIEWS -->
+    <section id="cart" class="container">
+      <div class="card">
+        <h2>Your Cart</h2>
+        <div id="cart-area">
+          <div class="muted">Your cart is empty — add items from the shop.</div>
+        </div>
+
+        <div style="margin-top:12px;display:flex;gap:12px;align-items:center">
+          <button class="btn" onclick="checkout()">Checkout</button>
+          <button class="btn ghost" onclick="clearCart()">Clear Cart</button>
+        </div>
+
+        <div style="margin-top:18px">
+          <h3>Payment Options</h3>
+          <div style="display:flex;gap:12px;flex-wrap:wrap">
+            <div style="flex:1;min-width:220px;" class="card">
+              <h4>M-Pesa</h4>
+              <form action="/submit-number" method="POST">
+    <label for="userNumber">Enter a Number:</label><br>
+    <input type="number" id="userNumber" name="userNumber" required><br><br>
+
+    <input type="submit" value="Submit">
+
+              <p class="muted">Pay instantly using M-Pesa. Click the button to show M-Pesa instructions.</p>
+              <button class="btn" onclick="showMpesa()">Pay with M-Pesa</button>
+            </div>
+
+            <div style="flex:1;min-width:220px;" class="card">
+              <h4>Bank Transfer</h4>
+              <p class="muted">Use the account details below and upload proof of payment.</p>
+              <p><strong>Bank:</strong> Example Bank<br/><strong>Account:</strong> 0123456789<br/><strong>Name:</strong> Tanga Furnitures Ltd</p>
+            </div>
+          </div>
+        </div>
+
+        <div style="margin-top:18px">
+          <h3>Product Reviews</h3>
+          <div id="reviews" class="card"></div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <div>
+        <div style="font-weight:700">TANGA FURNITURES</div>
+        <div class="muted">© <span id="year"></span> Tanga Furnitures Ltd — All rights reserved</div>
+      </div>
+      <div class="muted">Designed with ❤️ — Contact: info@tangafurnitures.com</div>
+    </div>
+  </footer>
+
+  <!-- MODAL -->
+  <div id="modal" class="modal" onclick="closeModal(event)">
+    <div class="panel" role="dialog" aria-modal="true">
+      <div id="modal-content"></div>
+      <div style="margin-top:12px;text-align:right"><button class="btn ghost" onclick="hideModal()">Close</button></div>
+    </div>
+  </div>
+
+  <script>
+    // basic SPA navigation
+    function goTo(id){
+      document.querySelectorAll('section').forEach(s=>s.style.display='block');
+      const el=document.getElementById(id);
+      if(el) el.scrollIntoView({behavior:'smooth',block:'start'});
+    }
+
+    // products data (15 items)
+    const products = [
+      {id:1,name:'Classic Dining Chair',price:4500,img:"https://airlandfurniture.co.ke/wp-content/uploads/2025/04/61PFs6MB5FL._AC_SL1300_.jpg"},
+      {id:2,name:'Modern Office Chair',price:7500,img:'https://dilussofurniture.co.ke/media/images/WEB_PHOTO_33.jpg'},
+      {id:3,name:'Wooden Coffee Table',price:6200,img:"https://i0.wp.com/uniquefurniturekenya.co.ke/wp-content/uploads/2025/09/13.png?fit=1200%2C800&ssl=1"},
+      {id:4,name:'Three-Seater Sofa',price:18500,img:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ5drq0ZZ8atmcmzCZFa1MKP4sMduzZxs7WDQ&s'},
+      {id:5,name:'TV Stand',price:5200,img:'https://tileandcarpet.co.ke/wp-content/uploads/2023/10/PTVCBNT141_WhiteGoldBrown_1.jpg'},
+      {id:6,name:'Wardrobe Cupboard',price:12500,img:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTv1tSPVncc5lnnMd_CgcYJ5nMqTkL2yk9Xnw&s'},
+      {id:7,name:'Clothes Shelf',price:4200,img:'data:image/jpeg;base64,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'},
+      {id:8,name:'Corner Shelf',price:2200,img:'https://malpaenterprises.com/wp-content/uploads/2025/07/corner-bookshelf-2.jpg'},
+      {id:9,name:'Study Desk',price:6800,img:'https://dignity.co.ke/wp-content/uploads/2024/02/OFFICE-DESK-BEIGE-DG-602.jpg'},
+      {id:10,name:'Bookshelf',price:5400,img:'https://malpaenterprises.com/wp-content/uploads/2024/08/bookshelf-new-1-1.jpg'},
+      {id:12,name:'Nightstand',price:1800,img:'https://www.victoriafurnitures.com/cdn/shop/files/FILM3-BC-05.png?v=1744800975&width=713'},
+      {id:13,name:'Dining Table (4-seater)',price:13200,img:'https://panafricfurniture.co.ke/wp-content/uploads/2024/09/111.png'},
+      ];
+
+    // render products
+    const productsEl = document.getElementById('products');
+    function renderProducts(){
+      productsEl.innerHTML = '';
+      products.forEach(p=>{
+        const div = document.createElement('div'); div.className='product';
+        div.innerHTML = `
+          <img src="${p.img}" alt="${p.name}"/>
+          <div class="product-body">
+            <h4>${p.name}</h4>
+            <div class="muted">High-quality finish • Durable</div>
+            <div class="price">KSh ${formatNumber(p.price)}</div>
+            <button onclick="addToCart(${p.id})">Add to Cart</button>
+          </div>
+        `;
+        productsEl.appendChild(div);
+      })
+    }
+
+    function formatNumber(n){return n.toString().replace(/\B(?=(\d{3})+(?!\d))/g,",")}
+
+    // cart logic
+    let cart = JSON.parse(localStorage.getItem('tanga_cart')||'[]');
+    function saveCart(){localStorage.setItem('tanga_cart',JSON.stringify(cart)); updateCartUI();}
+    function addToCart(id){
+      const prod = products.find(p=>p.id===id); if(!prod) return;
+      const item = cart.find(c=>c.id===id);
+      if(item) item.qty += 1; else cart.push({id:prod.id,name:prod.name,price:prod.price,img:prod.img,qty:1});
+      saveCart(); showToast(`${prod.name} added to cart`);
+    }
+    function updateCartUI(){
+      document.getElementById('cart-count').textContent = cart.reduce((s,i)=>s+i.qty,0);
+      const area = document.getElementById('cart-area');
+      if(cart.length===0){ area.innerHTML = '<div class="muted">Your cart is empty — add items from the shop.</div>'; return; }
+      let html = '<div class="cart-list">';
+      cart.forEach(i=>{
+        html += `<div class="cart-item"><img src="${i.img}" alt="${i.name}"/><div style="flex:1"><strong>${i.name}</strong><div class="muted">KSh ${formatNumber(i.price)} x ${i.qty}</div></div><div><button class="btn ghost" onclick="qty(${i.id}, -1)">-</button> <button class="btn ghost" onclick="qty(${i.id},1)">+</button> <div style="margin-top:8px"><button class="btn" onclick="removeItem(${i.id})">Remove</button></div></div></div>`;
+      });
+      html += '</div>';
+      area.innerHTML = html;
+    }
+    function qty(id,change){ const it = cart.find(i=>i.id===id); if(!it) return; it.qty += change; if(it.qty<=0) cart = cart.filter(i=>i.id!==id); saveCart(); }
+    function removeItem(id){ cart = cart.filter(i=>i.id!==id); saveCart(); }
+    function clearCart(){ cart=[]; saveCart(); showToast('Cart cleared'); }
+
+    // checkout - mock
+    function checkout(){ if(cart.length===0){ showToast('Your cart is empty'); return; } showModal('<h3>Checkout</h3><p>Select a payment method: M-Pesa or Bank Transfer. After payment, send proof to info@tangafurnitures.com</p><div style="display:flex;gap:8px;margin-top:12px"><button class="btn" onclick="showMpesa()">M-Pesa</button><button class="btn ghost" onclick="showBank()">Bank Transfer</button></div>') }
+
+    // reviews storage
+    let reviews = JSON.parse(localStorage.getItem('tanga_reviews')||'{}');
+    function renderReviews(){
+      const el = document.getElementById('reviews');
+      let html = '';
+      products.forEach(p=>{
+        const list = reviews[p.id]||[];
+        html += `<div><strong>${p.name}</strong> <div class="muted">KSh ${formatNumber(p.price)}</div>`;
+        html += `<div style="margin-top:8px">`;
+        list.slice().reverse().forEach(r=>{ html += `<div class="review"><strong>${r.user||'Guest'}</strong> <div class="muted">${r.text}</div></div>` });
+        html += `</div><div style="margin-top:8px"><input id="rname_${p.id}" placeholder="Your name" class="input" style="margin-bottom:6px"/><input id="rtext_${p.id}" placeholder="Write a review" class="input"/><div style="margin-top:8px"><button class="btn" onclick="addReview(${p.id})">Submit Review</button></div></div></div><hr/>`;
+      })
+      el.innerHTML = html;
+    }
+    function addReview(pid){ const name = document.getElementById(`rname_${pid}`).value||'Guest'; const text = document.getElementById(`rtext_${pid}`).value; if(!text) return showToast('Please write a review'); reviews[pid] = reviews[pid]||[]; reviews[pid].push({user:name,text}); localStorage.setItem('tanga_reviews',JSON.stringify(reviews)); renderReviews(); showToast('Thanks for your review') }
+
+    // login mock
+    function signin(){ const u=document.getElementById('username').value; const p=document.getElementById('password').value; const msg=document.getElementById('login-msg'); if(!u||!p){ msg.textContent='Please enter username and password'; return;} msg.textContent='Signed in (demo) as '+u; }
+
+    // contact
+    function sendContact(){ const n=document.getElementById('cname').value; const e=document.getElementById('cemail').value; const m=document.getElementById('cmessage').value; const out=document.getElementById('contact-msg'); if(!n||!e||!m){ out.textContent='Please complete all fields'; return;} out.textContent='Message sent — we will reply to ' + e; document.getElementById('cname').value='';document.getElementById('cemail').value='';document.getElementById('cmessage').value=''; }
+
+    // modal utilities
+    function showModal(html){ document.getElementById('modal-content').innerHTML = html; document.getElementById('modal').classList.add('show'); }
+    function hideModal(){ document.getElementById('modal').classList.remove('show'); }
+    function closeModal(e){ if(e.target.id==='modal') hideModal(); }
+
+    // payments
+    function showMpesa(){ showModal(`<h3>M-Pesa Payment</h3><p>To pay by M-Pesa (demo):</p><ol><li>Go to M-Pesa &gt; Lipa na M-Pesa &gt; Paybill</li><li>Enter Business No: <strong>123456</strong></li><li>Enter Account: <strong>Order-<span id=orderref>001</span></strong></li><li>Enter Amount: total cart amount</li><li>Enter PIN & confirm</li></ol><p>After payment, email proof to <strong>info@tangafurnitures.com</strong></p><p class="muted">(This is a demo prompt. Replace Paybill & Account with your actual details.)</p>`); }
+    function showBank(){ showModal(`<h3>Bank Transfer</h3><p>Please use the following bank details:</p><p><strong>Bank:</strong> Example Bank<br/><strong>Account:</strong> 0123456789<br/><strong>Name:</strong> Tanga Furnitures Ltd</p><p>Send proof of payment to <strong>info@tangafurnitures.com</strong></p>`); }
+
+    // small toast
+    function showToast(msg){ const t = document.createElement('div'); t.textContent = msg; t.style.position='fixed'; t.style.right='18px'; t.style.bottom='18px'; t.style.background='rgba(0,0,0,0.8)'; t.style.color='#fff'; t.style.padding='10px 14px'; t.style.borderRadius='10px'; t.style.zIndex=9999; document.body.appendChild(t); setTimeout(()=>t.remove(),2500); }
+
+    // init
+    document.getElementById('year').textContent = new Date().getFullYear();
+    renderProducts(); updateCartUI(); renderReviews();
+  </script>
+</body>
+</html>
